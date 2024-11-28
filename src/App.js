@@ -12,7 +12,27 @@ class App extends Component {
 
   //Your code here:
 
+  componentDidMount() {
+    // Add the first timer when the component mounts
+    this.handleAddTimer();
+  }
 
+  renderTimers = () =>
+    this.state.timerIDs.map(id => (
+      <Timer key={id} id={id} removeTimer={this.removeTimer} />
+    ));
+
+  handleAddTimer = () => {
+    this.setState(prevState => ({
+      timerIDs: [...prevState.timerIDs, Math.floor(Math.random() * 1000)]
+    }));
+  };
+
+  removeTimer = id => {
+    this.setState(prevState => ({
+      timerIDs: prevState.timerIDs.filter(timer_id => timer_id !== id)
+    }));
+  };
 
 
 
